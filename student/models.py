@@ -1,6 +1,6 @@
 from django.db import models
-from teacher.models import TeacherIT,TeacherENG
-from admin_panel.models import Group
+# from teacher.models import TeacherIT,TeacherENG
+# from admin_panel.models import Group
 
 class Student(models.Model):
     photo = models.ImageField(upload_to='student-img/', verbose_name='Фото студента')
@@ -9,10 +9,10 @@ class Student(models.Model):
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=12, verbose_name='Телефон')
     specialization = models.CharField(max_length=50, choices=[('Frontend', 'Frontend'), ('Backend', 'Backend')], verbose_name='Направление')
-    group = models.ForeignKey(Group, verbose_name='Группа', on_delete=models.CASCADE)
+    group = models.ForeignKey('admin_panel.Group', verbose_name='Группа', on_delete=models.CASCADE)
     age = models.IntegerField(verbose_name='Возраст')
-    teacher_it = models.ManyToManyField(TeacherIT, verbose_name='Учитель по айти')
-    teacher_eng = models.ManyToManyField(TeacherENG, verbose_name='Учитель по английскому')
+    teacher_it = models.ManyToManyField('teacher.TeacherIT', verbose_name='Учитель по айти')
+    teacher_eng = models.ManyToManyField('teacher.TeacherENG', verbose_name='Учитель по английскому')
     joined_date = models.DateField(verbose_name='Дата начала обучения')
 
     def __str__(self):

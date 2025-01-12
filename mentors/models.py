@@ -1,6 +1,6 @@
 from django.db import models
-from students.models import Student
-from admin_panel.models import Group
+# from students.models import Student
+# from admin_panel.models import Group
 
 class Mentor(models.Model):
     photo = models.ImageField(upload_to='mentor-img/', verbose_name='Фото ментора', blank=True, null=True)
@@ -13,7 +13,7 @@ class Mentor(models.Model):
         choices=[('Frontend', 'Frontend'), ('Backend', 'Backend'), ('Data Science', 'Data Science')],
         verbose_name='Специализация'
     )
-    groups = models.ManyToManyField(Group, verbose_name='Группы', blank=True)
+    groups = models.ManyToManyField('admin_panel.Group', verbose_name='Группы', blank=True)
     bio = models.TextField(verbose_name='О менторе', blank=True)
     experience = models.IntegerField(verbose_name='Опыт работы (лет)', default=0)
     joined_date = models.DateField(verbose_name='Дата начала работы')
@@ -23,7 +23,7 @@ class Mentor(models.Model):
 
 class MentorSession(models.Model):
     mentor = models.ForeignKey(Mentor, on_delete=models.CASCADE, verbose_name='Ментор')
-    students = models.ManyToManyField(Student, verbose_name='Студенты')
+    students = models.ManyToManyField('student.Student', verbose_name='Студенты')
     date = models.DateTimeField(verbose_name='Дата сессии')
     duration = models.DurationField(verbose_name='Продолжительность')
     topic = models.CharField(max_length=200, verbose_name='Тема сессии')

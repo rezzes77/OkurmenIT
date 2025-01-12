@@ -13,7 +13,7 @@ class Group(models.Model):
     time_start = models.TimeField(verbose_name='Начало урока')
     time_end = models.TimeField(verbose_name='Конец урока')
     work_days = models.ManyToManyField(DaysOfWeek, verbose_name='Дни занятий')
-    month = models.IntegerField(verbose_name='Месяц')
+    month = models.IntegerField(verbose_name='Месяц', default=1)
 
     def __str__(self):
         return f'{self.name} : {self.time_start}-{self.time_end}, месяц: {self.month}'
