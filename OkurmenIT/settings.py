@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'student',
     'teacher',
     'assistant',
-    'mentors'
+    'mentors',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
